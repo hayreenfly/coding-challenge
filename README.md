@@ -64,3 +64,8 @@ Req2:
 
 4.
 - Created a PATCH route for post where user(author) of post will be able to edit title and description of post.
+
+![Get All Posts by User](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/GET-all-posts-by-userId.png?raw=true)
+![Create a Post with multiple photos](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/POST-post-with-multiple-photos.png?raw=true)
+![Get an Error if More Than 5 Photos](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/POST-post-error-more-than-5.png?raw=true)
+![Edith a post](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/POST-edit-post.png?raw=true)
