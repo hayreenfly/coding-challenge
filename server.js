@@ -18,13 +18,10 @@ app.use(cors());
 // for parsing application/json
 app.use(bodyParser.json());
 
-// for parsing application/xwww-
+// for parsing application/xwww-form-urlencoded
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-//form-urlencoded
-
-
 
 app.get("/", (req, res) => {
   res.send("Set up complete for coding challenge");
