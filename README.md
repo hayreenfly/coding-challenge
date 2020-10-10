@@ -64,3 +64,26 @@ Req2:
 
 4.
 - Created a PATCH route for post where user(author) of post will be able to edit title and description of post.
+
+![Get All Posts by User](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/GET-all-posts-by-userId.png?raw=true)
+![Create a Post with multiple photos](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/POST-post-with-multiple-photos.png?raw=true)
+![Get an Error if More Than 5 Photos](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/POST-post-error-more-than-5.png?raw=true)
+![Edith a post](https://github.com/hayreenfly/coding-challenge/blob/req2/SCREENSHOTS-FOR-API-CALLS/POST-edit-post.png?raw=true)
+
+
+Req3:
+
+1.
+
+- Created a new model schema for comments. associated with posts.
+- Created a GET route for api/user/:postId/comments to view all comments with postId
+
+2.
+- Created a GET route for api/user to view all comments. with Pagination. Queried database to show all comments.
+  - Implemented pagination using req.query (http://localhost:3000/api/post?page=2&limit=3) where you specify page and limit and do an arr.slice(startIndex, endIndex).
+  - Impleted pagination as well with post comments.
+
+3.
+- Updated user model with migrations to add column username.
+- Created PATCH route on api/users to create/update users username. Used sequelize to update database.
+

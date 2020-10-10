@@ -2,8 +2,7 @@
 const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    "user",
-    {
+    "user", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -12,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: DataTypes.STRING,
       email: DataTypes.STRING,
+      username: DataTypes.STRING,
       password: DataTypes.STRING,
-    },
-    {
+    }, {
       hooks: {
         beforeCreate: async (user) => {
           const salt = await bcrypt.genSaltSync(10);

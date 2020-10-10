@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const auth = require("../../middleware/auth");
 
 const db = require("../../db/models/");
 const User = db.user;
@@ -86,5 +87,43 @@ router.post(
     }
   }
 );
+
+// @route PATCH api/users
+// @desc Update (or create) username
+// @access Private
+
+router.patch("/", auth, async (req, res) => {
+
+  const username = req.body.username;
+  const id = req.user.id;
+
+  try {
+    const user = await User.findOne({
+      where: {
+        id: id
+      }
+    });
+
+    if (!user) {
+      res.json("User not found.")
+    } else {
+
+      const updatedUser = await User.update({
+        username: username,
+      }, {
+        where: {
+          id: id
+        }
+      });
+
+      res.json("Successfully saved username");
+    }
+
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json("Server Error");
+  }
+});
 
 module.exports = router;

@@ -8,7 +8,6 @@ const multerS3 = require("multer-s3");
 const multer = require("multer");
 const path = require("path");
 
-const db = require("../../db/models/");
 const {
   check,
   validationResult
@@ -16,7 +15,11 @@ const {
 const {
   json
 } = require("body-parser");
+
+const db = require("../../db/models/");
 const Post = db.post;
+const Comment = db.comment;
+const User = db.user;
 
 const s3 = new aws.S3({
   accessKeyId: process.env.S3_ACCESS_SECRET,
@@ -61,6 +64,49 @@ function checkFileType(file, cb) {
     cb("Error: Images Only!");
   }
 }
+
+
+// @route GET api/post/
+// @desc Get all comments 
+// @access Private
+
+router.get("/", auth, async (req, res) => {
+  console.log("got here");
+
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const results = {};
+
+  let posts = await Post.findAll({
+    include: [{
+      model: User,
+      attributes: ["name"],
+    }, ],
+  });
+
+  if (endIndex < posts.length) {
+    results.next = {
+      page: page + 1,
+      limit: limit
+    }
+  }
+
+
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+      limit: limit
+    }
+  }
+
+  results.results = posts.slice(startIndex, endIndex);
+
+  res.json(results);
+});
 
 // @route GET api/post/:userId
 // @desc Get all posts by user
@@ -166,7 +212,7 @@ router.post(
   }
 );
 
-// @route PATCH api/post/postId
+// @route PATCH api/post/:postId
 // @desc Edit post title, and description
 // @access Private
 
@@ -189,5 +235,38 @@ router.patch("/:postId", auth, async (req, res) => {
   }
 
 });
+
+
+// @route GET api/:postId/comments
+// @desc Get all comments from post with a :postId 
+// @access Private
+
+router.get("/:postId/comments", auth, async (req, res) => {
+  const postId = req.params.postId;
+
+  try {
+
+    const comments = await Comment.findAll({
+      where: {
+        postId: postId
+      },
+      include: [{
+        model: User,
+        attributes: ["name"],
+      }, ],
+    });
+
+    if (comments.length === 0) {
+      res.json("No comments yet.")
+    }
+
+    res.json(comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json("Server Error");
+  }
+});
+
+
 
 module.exports = router;
