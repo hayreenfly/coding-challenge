@@ -87,3 +87,7 @@ Req3:
 - Updated user model with migrations to add column username.
 - Created PATCH route on api/users to create/update users username. Used sequelize to update database.
 
+![Get All Posts with pagination](https://github.com/hayreenfly/coding-challenge/blob/req3/SCREENSHOTS-FOR-API-CALLS/GET-all-comments-pagination.png?raw=true)
+![Get all Comments with pagination](https://github.com/hayreenfly/coding-challenge/blob/req3/SCREENSHOTS-FOR-API-CALLS/GET-all-comments-pagination.png?raw=true)
+![POST a comment](https://github.com/hayreenfly/coding-challenge/blob/req3/SCREENSHOTS-FOR-API-CALLS/POST-comment-post.png?raw=true)
+![Update username](https://github.com/hayreenfly/coding-challenge/blob/req3/SCREENSHOTS-FOR-API-CALLS/UPDATE-username.png?raw=true)
