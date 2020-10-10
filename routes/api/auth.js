@@ -4,7 +4,10 @@ const bcrypt = require("bcrypt");
 const auth = require("../../middleware/auth");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { check, validationResult } = require("express-validator");
+const {
+  check,
+  validationResult
+} = require("express-validator");
 
 const db = require("../../db/models");
 const User = db.user;
@@ -49,7 +52,10 @@ router.post(
       });
     }
 
-    const { email, password } = req.body;
+    const {
+      email,
+      password
+    } = req.body;
 
     try {
       let user = await User.findOne({
@@ -60,11 +66,9 @@ router.post(
 
       if (!user) {
         return res.status(400).json({
-          errors: [
-            {
-              msg: "Invalid Credentials",
-            },
-          ],
+          errors: [{
+            msg: "Invalid Credentials",
+          }, ],
         });
       }
 
@@ -72,11 +76,9 @@ router.post(
 
       if (!isMatch) {
         return res.status(400).json({
-          errors: [
-            {
-              msg: "Invalid Credentials",
-            },
-          ],
+          errors: [{
+            msg: "Invalid Credentials",
+          }, ],
         });
       }
 
@@ -91,8 +93,7 @@ router.post(
 
       jwt.sign(
         payload,
-        process.env.JWT_SECRET,
-        {
+        process.env.JWT_SECRET, {
           expiresIn: 3600,
         },
         (err, token) => {

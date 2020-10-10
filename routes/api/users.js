@@ -6,7 +6,10 @@ const db = require("../../db/models/");
 const User = db.user;
 
 // middleware that checks and handle validation errors
-const { check, validationResult } = require("express-validator");
+const {
+  check,
+  validationResult
+} = require("express-validator");
 
 // @route POST api/users
 // @desc Register user
@@ -26,21 +29,29 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({
+        errors: errors.array()
+      });
     }
 
-    const { name, email, password } = req.body;
+    const {
+      name,
+      email,
+      password
+    } = req.body;
 
     try {
-      let user = await User.findOne({ where: { email: email } });
+      let user = await User.findOne({
+        where: {
+          email: email
+        }
+      });
 
       if (user) {
         res.status(400).json({
-          errors: [
-            {
-              msg: "The email address is already being used.",
-            },
-          ],
+          errors: [{
+            msg: "The email address is already being used.",
+          }, ],
         });
       } else {
         user = await User.create({
@@ -58,8 +69,7 @@ router.post(
 
         jwt.sign(
           payload,
-          process.env.JWT_SECRET,
-          {
+          process.env.JWT_SECRET, {
             expiresIn: 3600,
           },
           (err, token) => {

@@ -42,3 +42,25 @@ Req1:
 ![Login User](https://github.com/hayreenfly/coding-challenge/blob/master/SCREENSHOTS-FOR-API-CALLS/POST-login-user.png?raw=true)
 ![Get User Details](https://github.com/hayreenfly/coding-challenge/blob/master/SCREENSHOTS-FOR-API-CALLS/GET-get-user-details.png?raw=true)
 ![Create a Post](https://github.com/hayreenfly/coding-challenge/blob/master/SCREENSHOTS-FOR-API-CALLS/POST-create-post.png?raw=true)
+
+Req2:
+
+1.
+
+- Created a post route in which a user can create a new post with the attributes Title, Description, Photo.
+
+2.
+
+- In the GET route for api/post/:userId queried the database using sequelize to return all posts from user.
+  - Used moment library to calculate the time difference from when the post was created and now.
+  - Created a post object with all the elements and push the data in foundPosts array and send the json response with the found posts.
+
+3.
+
+- Created an S3 Bucket with AWS. Saved credentials on a dot env file. Implemented multer and aws to upload images to aws S3. 
+- Modified Posts model to make string size to 400 characters so all photo url will be saved in database as one string. (The photoURL will be sent to front end as an array as I am splitting the string to be returned as an array).
+- Set up multer in which you cannot upload more than 5 photos.
+- Created POST route for Post to view all posts created.
+
+4.
+- Created a PATCH route for post where user(author) of post will be able to edit title and description of post.
